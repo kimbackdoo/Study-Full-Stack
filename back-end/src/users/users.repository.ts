@@ -8,8 +8,8 @@ import { User } from './users.schema'
 export class UsersRepository {
     constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
-    async existsEmail(email: string) {
-        return await this.userModel.exists({ email })
+    async findUserByEmail(email: string) {
+        return await this.userModel.findOne({ email })
     }
 
     async create(user: CreateUserDto) {
