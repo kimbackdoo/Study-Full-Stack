@@ -10,7 +10,7 @@ export class AuthController {
 
     @ApiOperation({ summary: '로그인' })
     @Post('login')
-    logIn(@Body() logInData: SignInDto) {
-        return this.authService.jwtSignIn(logInData)
+    logIn(@Body() signInData: SignInDto) {
+        return this.authService.jwtSignIn(signInData)
     }
 }
