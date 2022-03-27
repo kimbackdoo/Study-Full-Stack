@@ -13,7 +13,7 @@ export class AuthService {
 
     async jwtSignIn({ email, password }: SignInDto) {
         //* 요청한 이메일이 존재하는지
-        const user = await this.usersRepository.findUserByEmail(email)
+        const user = await this.usersRepository.findUserByEmail({ email })
         if (!user) throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요.')
 
         //* 요청한 비밀번호가 존재하는지

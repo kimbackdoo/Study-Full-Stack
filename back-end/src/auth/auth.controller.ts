@@ -9,8 +9,8 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
     @ApiOperation({ summary: '로그인' })
-    @Post('login')
-    logIn(@Body() signInData: SignInDto) {
+    @Post('sign-in')
+    signIn(@Body() signInData: SignInDto) {
         return this.authService.jwtSignIn(signInData)
     }
 }

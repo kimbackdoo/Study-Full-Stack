@@ -8,8 +8,12 @@ import { User } from './users.schema'
 export class UsersRepository {
     constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
-    async findUserByEmail(email: string) {
+    async findUserByEmail({ email }: { email: string }) {
         return await this.userModel.findOne({ email })
+    }
+
+    async findUserByIdWithoutPassword({ userId }: { userId: string }) {
+        return await this.userModel.findById(userId).select('-password')
     }
 
     async create(user: CreateUserDto) {
