@@ -35,6 +35,6 @@ export class User extends Document {
 
 export const UserSchema = SchemaFactory.createForClass(User)
 
-UserSchema.virtual('virtualData').get(function (this: User) {
+UserSchema.virtual('virtualUser').get(function (this: User) {
     return { id: this.id, email: this.email, name: this.name }
 })

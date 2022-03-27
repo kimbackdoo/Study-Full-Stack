@@ -13,7 +13,7 @@ export class UsersService {
     async createUser(createUserDto: CreateUserDto) {
         const { email, name, password } = createUserDto
         // user가 이미 존재하면 해당 user의 id가 담긴 객체, user가 없으면 null return
-        const isUserExist = await this.usersRepository.findUserByEmail(email)
+        const isUserExist = await this.usersRepository.findUserByEmail({ email })
         if (isUserExist) throw new UnauthorizedException('이미 존재하는 사용자입니다.')
 
         const saltOrRounds = 10
