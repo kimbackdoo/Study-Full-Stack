@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "target": "es6", // es6 문법을 기준
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "checkJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noImplicitAny": true, // 최소한 any 타입 있어야함
+        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "noUnusedLocals": true, // 사용하지 않는 지역변수 error
+        "noFallthroughCasesInSwitch": true // 이상한 switch문 error
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "exclude": ["node_modules"]
+}
