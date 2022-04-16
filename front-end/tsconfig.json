@@ -20,7 +20,7 @@
         "noUnusedLocals": true, // 사용하지 않는 지역변수 error
         "noFallthroughCasesInSwitch": true, // 이상한 switch문 error
 
-        "baseUrl": ".",
+        "baseUrl": "src",
         "paths": {
             "@styles/*": ["styles/*"],
             "@components/*": ["components/*"]
