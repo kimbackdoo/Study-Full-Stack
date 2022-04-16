@@ -18,7 +18,13 @@
         "jsx": "preserve",
         "incremental": true,
         "noUnusedLocals": true, // 사용하지 않는 지역변수 error
-        "noFallthroughCasesInSwitch": true // 이상한 switch문 error
+        "noFallthroughCasesInSwitch": true, // 이상한 switch문 error
+
+        "baseUrl": ".",
+        "paths": {
+            "@styles/*": ["styles/*"],
+            "@components/*": ["components/*"]
+        }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules"]
