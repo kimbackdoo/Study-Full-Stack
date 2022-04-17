@@ -13,6 +13,12 @@ body {
 body {
     margin: 0 auto;
     width: 1200px;
+    background: #faebd7;
+}
+
+body > div {
+    padding: 24px;
+    background: rgb(244 244 245);
 }
 
 a {
