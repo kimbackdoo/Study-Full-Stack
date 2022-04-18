@@ -29,12 +29,12 @@ function SignIn() {
                 <Label htmlFor="password">비밀번호</Label>
                 <div className="flex">
                     <Input id="password" type={passwordType} placeholder="비밀번호" />
-                    <button type="button" onClick={() => setIsShow((prev) => !prev)}>
+                    <Button onClick={() => setIsShow((prev) => !prev)}>
                         <Icon icon={passwordIcon} />
-                    </button>
+                    </Button>
                 </div>
             </div>
-            <Button>로그인</Button>
+            <Button theme="sign">로그인</Button>
         </form>
     )
 }
