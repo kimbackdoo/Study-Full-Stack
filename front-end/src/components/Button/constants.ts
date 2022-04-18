@@ -1,5 +1,5 @@
 export type ButtonSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl'
-export type ButtonTheme = 'success' | 'error' | 'warning' | 'default'
+export type ButtonTheme = 'success' | 'error' | 'warning' | 'sign' | 'default'
 
 export const DEFAULT = 'py-2 w-full rounded-md shadow-md font-bold text-white transition-all'
 
@@ -17,5 +17,6 @@ export const THEMES = {
     success: 'bg-sky-500',
     error: 'bg-red-400',
     warning: 'bg-amber-400',
-    default: 'bg-rose-400',
+    sign: 'bg-rose-400',
+    default: 'bg-white',
 }
