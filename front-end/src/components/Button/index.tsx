@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode, useImperativeHandle } from 'react'
 import {
     ButtonSize,
     ButtonTheme,
@@ -8,34 +8,48 @@ import {
     THEMES,
 } from '@components/Button/constants'
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'style'> {
     type?: 'button' | 'submit'
     size?: ButtonSize
     theme?: ButtonTheme
+    style?: string
     disabled?: boolean
     children?: ReactNode
 }
 
-function Button({
-    type = 'button',
-    size = 'base',
-    theme = 'default',
-    disabled,
-    children,
-    ...rest
-}: ButtonProps) {
-    const defaultStyle = theme === 'default' ? '' : DEFAULT
-
-    return (
-        <button
-            className={`${THEMES[theme]} ${SIZES[size]} ${defaultStyle} ${PSEUDOS}`}
-            type={type}
-            disabled={disabled}
-            {...rest}
-        >
-            {children}
-        </button>
-    )
+interface Ref {
+    isShow: () => void
 }
 
+const Button = forwardRef<Ref, ButtonProps>(
+    (
+        { type = 'button', size = 'base', theme = 'default', style, disabled, children, ...rest },
+        ref,
+    ) => {
+        // TODO useImperativeHandle 훅을 사용해서 비밀번호 버튼 만들 것
+        // useImperativeHandle(
+        //     ref,
+        //     () => ({
+        //         isShow: () => {},
+        //     }),
+        //     [],
+        // )
+
+        const defaultStyle = theme === 'default' ? '' : DEFAULT
+        const customStyle = style ?? ''
+
+        return (
+            <button
+                className={`${THEMES[theme]} ${SIZES[size]} ${defaultStyle} ${PSEUDOS} ${customStyle}`}
+                type={type}
+                disabled={disabled}
+                {...rest}
+            >
+                {children}
+            </button>
+        )
+    },
+)
+
+Button.displayName = 'Button'
 export default Button
