@@ -4,11 +4,7 @@
         "es6": true,
         "node": true
     },
-    "extends": [
-        "eslint-config-next",
-        "next/core-web-vitals",
-        "plugin:@typescript-eslint/recommended"
-    ],
+    "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
     "plugins": ["@typescript-eslint"],
     "parserOptions": {
         "ecmaFeatures": {
@@ -20,8 +16,9 @@
     "parser": "@typescript-eslint/parser",
     "rules": {
         "prefer-const": "error",
-        "@typescript-eslint/no-unused-vars": "error",
-        "@typescript-eslint/no-explicit-any": "error",
-        "no-console": "off"
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "@typescript-eslint/no-unused-vars": "error", // typescript에서 사용하지 않는 변수 error 처리
+        "@typescript-eslint/no-explicit-any": "error" // typescript에서 any라도 type 붙이지 않으면 error 처리
     }
 }
