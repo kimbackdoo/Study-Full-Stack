@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import Icon from '@components/Icon'
 import Label from '@components/Label'
-import Input from '@components/Input'
+import Input, { Ref } from '@components/Input'
 import Button from '@components/Button'
 
 function SignIn() {
+    const inputTest = useRef<Ref>(null)
     const [isShow, setIsShow] = useState<boolean>(false)
 
     const passwordType = isShow ? 'text' : 'password'
     const passwordIcon = isShow ? 'password-show' : 'password-hide'
+    // const passwordType = inputTest.current?.isShow ? 'text' : 'password'
+    // const passwordIcon = inputTest.current?.isShow ? 'password-show' : 'password-hide'
+    console.log(inputTest.current?.isShow)
 
     return (
         <form className="mx-auto mb-4 px-8 pt-6 pb-8 w-96 rounded shadow-md bg-white">
@@ -27,12 +31,17 @@ function SignIn() {
             </div>
             <div className="mb-6 w-full">
                 <Label htmlFor="password">비밀번호</Label>
-                <div className="flex">
-                    <Input id="password" type={passwordType} placeholder="비밀번호" />
-                    <Button onClick={() => setIsShow((prev) => !prev)}>
+                <Input ref={inputTest} id="password" type={passwordType} placeholder="비밀번호">
+                    <Button
+                        style="w-5 h-5"
+                        onClick={() => {
+                            // setIsShow((prev) => !prev)
+                            inputTest.current?.show()
+                        }}
+                    >
                         <Icon icon={passwordIcon} />
                     </Button>
-                </div>
+                </Input>
             </div>
             <Button theme="sign">로그인</Button>
         </form>
