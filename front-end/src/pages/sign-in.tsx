@@ -1,19 +1,23 @@
 import { useRef, useState } from 'react'
 import Link from 'next/link'
+
 import Icon from '@components/Icon'
 import Label from '@components/Label'
-import Input, { Ref } from '@components/Input'
+import Input from '@components/Input'
 import Button from '@components/Button'
 
-function SignIn() {
-    const inputTest = useRef<Ref>(null)
-    const [isShow, setIsShow] = useState<boolean>(false)
+import type { InputRef } from '@components/Input'
 
-    const passwordType = isShow ? 'text' : 'password'
-    const passwordIcon = isShow ? 'password-show' : 'password-hide'
+function SignIn() {
+    const inputRef = useRef<InputRef>({} as InputRef)
+    // const [isShow, setIsShow] = useState<boolean>(false)
+
+    // const passwordType = inputRef.current?.isShow ? 'text' : 'password'
+    // const passwordIcon = inputRef.current?.isShow ? 'password-show' : 'password-hide'
     // const passwordType = inputTest.current?.isShow ? 'text' : 'password'
     // const passwordIcon = inputTest.current?.isShow ? 'password-show' : 'password-hide'
-    console.log(inputTest.current?.isShow)
+
+    console.log(inputRef.current.isShow)
 
     return (
         <form className="mx-auto mb-4 px-8 pt-6 pb-8 w-96 rounded shadow-md bg-white">
@@ -31,15 +35,16 @@ function SignIn() {
             </div>
             <div className="mb-6 w-full">
                 <Label htmlFor="password">비밀번호</Label>
-                <Input ref={inputTest} id="password" type={passwordType} placeholder="비밀번호">
+                <Input ref={inputRef} id="password" placeholder="비밀번호">
                     <Button
                         style="w-5 h-5"
                         onClick={() => {
                             // setIsShow((prev) => !prev)
-                            inputTest.current?.show()
+                            inputRef.current?.show()
                         }}
                     >
-                        <Icon icon={passwordIcon} />
+                        {/* <Icon icon={passwordIcon} /> */}
+                        <span>ss</span>
                     </Button>
                 </Input>
             </div>

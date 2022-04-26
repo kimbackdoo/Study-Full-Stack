@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes, ReactNode, useImperativeHandle, useRef, useState } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode, useImperativeHandle, useState } from 'react'
 import { DEFAULT, PSEUDOS } from '@components/Input/constants'
 import useFocus from '@hooks/useFocus'
 
@@ -7,32 +7,32 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
     children?: ReactNode
 }
 
-export interface Ref {
+export interface InputRef extends HTMLInputElement {
     show: () => void
     isShow: boolean
 }
 
 // TODO useImperativeHandle 이용해서 password 보이게, 안보이게 어떻게 구현할지 고민...
-const Input = forwardRef<Ref, InputProps>(({ type = 'text', children, ...rest }, ref) => {
+const Input = forwardRef<InputRef, InputProps>(({ type = 'text', children, ...rest }, ref) => {
     const [isFocus, { ...restFocus }] = useFocus()
-    const [isShow, setIsShow] = useState<boolean>(false)
-    const inputRef = useRef<HTMLInputElement>(null)
+    const [isShow, setIsShow] = useState(false)
 
     useImperativeHandle(
         ref,
-        () => ({
-            show: () => setIsShow((prev) => !prev),
-            isShow,
-        }),
+        () =>
+            ({
+                show: () => setIsShow((prev) => !prev),
+                isShow,
+            } as InputRef),
         [isShow],
     )
 
-    // console.log(isShow)
     const focusStyle = isFocus ? PSEUDOS : ''
+    const showInput = isShow ? type : 'password'
 
     return (
         <div className={`${DEFAULT} ${focusStyle}`} {...restFocus}>
-            <input className="w-full outline-none" ref={inputRef} type={type} {...rest} />
+            <input ref={ref} className="w-full outline-none" type={showInput} {...rest} />
             {children}
         </div>
     )
