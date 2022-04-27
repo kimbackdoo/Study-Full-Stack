@@ -1,6 +1,9 @@
-import { forwardRef, HTMLAttributes, ReactNode, useImperativeHandle, useState } from 'react'
-import { DEFAULT, PSEUDOS } from '@components/Input/constants'
+import { forwardRef, useImperativeHandle, useState } from 'react'
+
 import useFocus from '@hooks/useFocus'
+import { DEFAULT, PSEUDOS } from '@components/Input/constants'
+
+import type { HTMLAttributes, ReactNode } from 'react'
 
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
     type?: 'text' | 'password' | 'email'
