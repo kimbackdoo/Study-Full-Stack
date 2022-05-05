@@ -18,7 +18,7 @@
         "prefer-const": "error",
         "no-unused-vars": "off",
         "no-console": "off",
-        "@typescript-eslint/no-unused-vars": "error", // typescript에서 사용하지 않는 변수 error 처리
+        "@typescript-eslint/no-unused-vars": "warn", // typescript에서 사용하지 않는 변수 error 처리
         "@typescript-eslint/no-explicit-any": "error" // typescript에서 any라도 type 붙이지 않으면 error 처리
     }
 }
