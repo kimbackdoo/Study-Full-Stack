@@ -1,24 +1,36 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 import Icon from '@components/Icon'
 import Label from '@components/Label'
 import Input from '@components/Input'
 import Button from '@components/Button'
 
-import type { InputRef } from '@components/Input'
+type SignInFormValues = { username: string; password: string }
 
 function SignIn() {
-    const inputRef = useRef<InputRef>({} as InputRef)
-    // const [isShow, setIsShow] = useState<boolean>(false)
+    const { formState, handleSubmit, register } = useForm<SignInFormValues>({
+        defaultValues: { username: '', password: '' },
+        resolver: yupResolver(schema),
+    })
+    const { errors } = formState
+    const [isShow, setIsShow] = useState(false)
 
-    // const passwordType = inputRef.current?.isShow ? 'text' : 'password'
-    // const passwordIcon = inputRef.current?.isShow ? 'password-show' : 'password-hide'
-    // const passwordType = inputTest.current?.isShow ? 'text' : 'password'
-    // const passwordIcon = inputTest.current?.isShow ? 'password-show' : 'password-hide'
+    const onSubmit = (formValues: SignInFormValues) => {
+        console.log(formValues)
+    }
+
+    const passwordType = isShow ? 'text' : 'password'
+    const passwordIcon = isShow ? 'password-show' : 'password-hide'
 
     return (
-        <form className="mx-auto mb-4 px-8 pt-6 pb-8 w-96 rounded shadow-md bg-white">
+        <form
+            className="mx-auto mb-4 px-8 pt-6 pb-8 w-96 rounded shadow-md bg-white"
+            onSubmit={handleSubmit(onSubmit)}
+        >
             <div className="flex items-center justify-between mb-6">
                 <h3 className="font-bold text-gray-600">로그인</h3>
                 <Link href="/sign-up">
@@ -29,33 +41,38 @@ function SignIn() {
             </div>
             <div className="mb-4 w-full">
                 <Label htmlFor="username">이메일</Label>
-                <Input id="username" placeholder="이메일" />
+                <Input id="username" placeholder="이메일" {...register('username')} />
+                <p className={ERROR}>{errors.username?.message}</p>
             </div>
             <div className="mb-6 w-full">
                 <Label htmlFor="password">비밀번호</Label>
                 <Input
-                    ref={inputRef}
                     id="password"
-                    type={getPasswordType(inputRef.current.isShow)}
+                    type={passwordType}
                     placeholder="비밀번호"
+                    {...register('password')}
                 >
-                    <Button style="w-5 h-5" onClick={inputRef.current.show}>
-                        <Icon icon={getPasswordIcon(inputRef.current.isShow)} />
+                    <Button style="w-5 h-5" onClick={() => setIsShow((prev) => !prev)}>
+                        <Icon icon={passwordIcon} />
                     </Button>
                 </Input>
+                <p className={ERROR}>{errors.password?.message}</p>
             </div>
-            <Button theme="sign">로그인</Button>
+            <Button type="submit" theme="sign">
+                로그인
+            </Button>
         </form>
     )
 }
 
-function getPasswordType(isShow: boolean) {
-    console.log(isShow)
-    return isShow ? 'text' : 'password'
-}
+const schema = yup.object({
+    username: yup
+        .string()
+        .required('이메일 아이디를 입력해주세요.')
+        .email('이메일 형식이 맞지 않습니다.'),
+    password: yup.string().required('비밀번호를 입력해주세요.'),
+})
 
-function getPasswordIcon(isShow: boolean) {
-    return isShow ? 'password-show' : 'password-hide'
-}
+const ERROR = 'py-1 text-sm text-red-400'
 
 export default SignIn
