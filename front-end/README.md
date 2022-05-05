@@ -13,5 +13,7 @@ http://localhost:3000 열기
 ### 기술스택
 
 -   Next.js
--   Tailwind Css
+-   React Query (API 상태 관리)
+-   React Hook Form (Form 상태 관리)
+-   Tailwind Css (UI 디자인)
 -   ...
