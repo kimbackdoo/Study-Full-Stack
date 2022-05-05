@@ -22,6 +22,7 @@
 
         "baseUrl": "src",
         "paths": {
+            "@lib/*": ["lib/*"],
             "@styles/*": ["styles/*"],
             "@hooks/*": ["hooks/*"],
             "@components/*": ["components/*"],
