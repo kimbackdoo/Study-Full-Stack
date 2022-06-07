@@ -1,10 +1,13 @@
+import Icon from '@components/Icon'
 import Link from 'next/link'
 
 function Navbar() {
     return (
         <nav className="flex items-center justify-between">
             <Link href="/">
-                <a>this is log area (go to home)</a>
+                <a>
+                    <Icon icon="logo" width={50} height={50} />
+                </a>
             </Link>
             <div>
                 <Link href="/sign-in">
